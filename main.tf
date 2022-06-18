@@ -18,7 +18,7 @@ resource "aws_instance" "app_server1" {
   instance_type = "t2.micro"
 
   tags = {
-    Name = "ExampleAppServerInstance"
+    Name = "ExampleAppServerInstance1"
   }
 }
 
@@ -27,7 +27,7 @@ resource "aws_instance" "app_server2" {
   instance_type = "t2.micro"
 
   tags = {
-    Name = "ExampleAppServerInstance"
+    Name = "ExampleAppServerInstance2"
   }
 }
 
