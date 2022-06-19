@@ -16,18 +16,20 @@ provider "aws" {
 resource "aws_instance" "app_server1" {
   ami           = "ami-06640050dc3f556bb"
   instance_type = "t2.micro"
+  key_name = "TestRhelKeyPair"
 
   tags = {
-    Name = "ExampleAppServerInstance1"
+    Name = "Red Hat App Server 1"
   }
 }
 
 resource "aws_instance" "app_server2" {
   ami           = "ami-06640050dc3f556bb"
   instance_type = "t2.micro"
+  key_name = "TestRhelKeyPair"
 
   tags = {
-    Name = "ExampleAppServerInstance2"
+    Name = "Red Hat App Server 2"
   }
 }
 
