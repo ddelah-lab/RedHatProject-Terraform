@@ -20,7 +20,7 @@ resource "aws_instance" "app_server1" {
   security_groups = ["WebServerRedHatSecurityGroup"]
 
   tags = {
-    Name = "Red Hat App Server 1"
+    Name = "Red Hat App Server 1.0"
   }
 }
 
@@ -31,7 +31,7 @@ resource "aws_instance" "app_server2" {
   security_groups = ["WebServerRedHatSecurityGroup"]
 
   tags = {
-    Name = "Red Hat App Server 2"
+    Name = "Red Hat App Server 2.0"
   }
 }
 
