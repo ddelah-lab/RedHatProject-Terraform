@@ -13,25 +13,37 @@ provider "aws" {
   region  = "us-east-1"
 }
 
-resource "aws_instance" "app_server1" {
-  ami           = "ami-06640050dc3f556bb"
-  instance_type = "t2.micro"
-  key_name = "TestRhelKeyPair"
-  security_groups = ["WebServerRedHatSecurityGroup"]
 
-  tags = {
-    Name = "Red Hat App Server 1.0"
+// Create aws_ami filter to pick up the ami available in your region
+data "aws_ami" "rhel_8_5" {
+  most_recent = true
+  owners = ["309956199498"] // Red Hat's Account ID
+  filter {
+    name   = "name"
+    values = ["RHEL-8.5*"]
+  }
+  filter {
+    name   = "architecture"
+    values = ["x86_64"]
+  }
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
   }
 }
 
-resource "aws_instance" "app_server2" {
-  ami           = "ami-06640050dc3f556bb"
-  instance_type = "t2.micro"
-  key_name = "TestRhelKeyPair"
-  security_groups = ["WebServerRedHatSecurityGroup"]
-
+// Configure the EC2 instance in a public subnet
+resource "aws_instance" "ec2_public" {
+  ami                         = data.aws_ami.rhel_8_5.id
+  associate_public_ip_address = true
+  instance_type               = "t2.micro"
+  key_name                    = "TestRhelKeyPair"
   tags = {
-    Name = "Red Hat App Server 2.0"
+    "Name" = "New EC2"
   }
 }
 
